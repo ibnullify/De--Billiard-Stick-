@@ -18,38 +18,43 @@
 //import java.util.NoSuchElementException;
 //import java.lang.RuntimeException;
 
-public class DLLQueue<T>// implements Deque<T> 
+public class DLLDeque<T> implements Deque<T> 
 {
-    private DLLNode<T> _front, _end; //Constructor(value,previous,next)
-
+    private DLLNode<T> _first, _last; //Constructor(value,previous,next)
+    private int _size;
     // default constructor creates an empty queue
-    public DLLQueue()
+    public DLLDeque()
 	{ 
-	    _front = _end = null;
+	    _first = _last = null;
+	    _size = 0;
 	}
 
     /*****NEW INTERFACE METHODS*****/
     public void addFirst (T val) {
 
 	if (isEmpty()) {
-	    _first.setCargo(val);
+	    _first = new DLLNode(val, null, null);
 	    _last = _first;
+	    _size++;
 	    return;
 	} else {
 	    _first.setPrev(new DLLNode<T>(val, null, _first));
 	    _first = _first.getPrev();
+	    _size++;
 	    return;
 	}
     }
 
     public void addLast(T val) {
 	if (isEmpty()) {
-	    _last.setCargo(val);
+	    _last = new DLLNode(val, null, null);
 	    _first = _last;
+	    _size++;
 	    return;
 	} else {
 	    _last.setNext(new DLLNode<T>(val, _last, null));
 	    _last = _last.getNext();
+	    _size++;
 	    return;
 	}
     }
@@ -61,6 +66,7 @@ public class DLLQueue<T>// implements Deque<T>
 	}
 	T rtn = _first.getCargo();
 	_first = _first.getNext();
+	_size--;
 	return rtn;
     }
     
@@ -68,10 +74,23 @@ public class DLLQueue<T>// implements Deque<T>
         if (isEmpty()) {
 	    //throw exception when someone tries to remove from an empty queue
 	    throw new IndexOutOfBoundsException("There is nothing to remove.");
-    }
+	}
 	T rtn = _last.getCargo();
 	_last = _last.getPrev();
+	_size--;
 	return rtn;
+    }
+
+    public T peekFirst() {
+	return _first.getCargo();
+    }
+
+    public T peekLast() {
+	return _last.getCargo();
+    }
+    
+    public int size() {
+	return _size;
     }
 
     
@@ -122,7 +141,7 @@ public class DLLQueue<T>// implements Deque<T>
     /***********PREVIOUS METHODS TO BE USED******/
     public boolean isEmpty() 
     {
-	return _front == null; 
+	return _size == 0; 
     }//O(1)
 
 
@@ -130,39 +149,75 @@ public class DLLQueue<T>// implements Deque<T>
     public String toString() 
     { 
 	String foo = "";
-	DLLNode<T> tmp = _front;
+	DLLNode<T> tmp = _first;
 	while ( tmp != null ) {
-	    foo += tmp.getValue() + " ";
+	    foo += tmp.getCargo() + " ";
 	    tmp = tmp.getNext();
 	}
 	return foo;
     }//O(n)
     /***********PREVIOUS METHODS TO BE USED******/
 
-    /*v~~~~~~~~~~~~~~MAKE MORE~~~~~~~~~~~~~~v
+    
     public static void main( String[] args ) 
     {
-	Queue<String> DLLDequelJ = new DLLDeque<String>();
+
+
+	
+	DLLDeque<String> DLLDequelJ = new DLLDeque<String>();
+	
+	System.out.println("\nsize");
+	System.out.println(DLLDequelJ.size());
 
 	System.out.println("\nnow enqueuing thrice..."); 
-	LLQueuelJ.enqueue("James");
-	LLQueuelJ.enqueue("Todd");
-	LLQueuelJ.enqueue("Smith");
+	DLLDequelJ.addFirst("James");
+	DLLDequelJ.addFirst("Todd");
+	DLLDequelJ.addFirst("Smith");
+	System.out.println( DLLDequelJ ); //for testing toString()...
+	System.out.println("\npeeking first");
+	System.out.println(DLLDequelJ.peekFirst()); 
+	System.out.println("\npeeking last"); 	
+	System.out.println(DLLDequelJ.peekLast()); 
+
+	System.out.println("\nnow enqueuing thrice..."); 
+	DLLDequelJ.addLast("James");
+	DLLDequelJ.addLast("Todd");
+	DLLDequelJ.addLast("Smith");
+	System.out.println( DLLDequelJ ); //for testing toString()...
+	System.out.println("\npeeking first");
+	System.out.println(DLLDequelJ.peekFirst()); 
+	System.out.println("\npeeking last"); 	
+	System.out.println(DLLDequelJ.peekLast()); 
+	
+	System.out.println("\nsize");
+	System.out.println(DLLDequelJ.size());
 
 	System.out.println("\nnow testing toString()..."); 
 	System.out.println( DLLDequelJ ); //for testing toString()...
 
+
 	System.out.println("\nnow dequeuing thrice..."); 
-	System.out.println( DLLDequelJ.dequeue() );
-	System.out.println( DLLDequelJ.dequeue() );
-	System.out.println( DLLDequelJ.dequeue() );
+	System.out.println( DLLDequelJ.removeFirst() );
+	System.out.println( DLLDequelJ.removeFirst() );
+	System.out.println( DLLDequelJ.removeFirst() );
+	
+	System.out.println("\nnow testing toString()..."); 
+	System.out.println( DLLDequelJ ); //for testing toString()...
+
+	System.out.println("\nnow dequeuing thrice..."); 
+	System.out.println( DLLDequelJ.removeLast() );
+	System.out.println( DLLDequelJ.removeLast() );
+	System.out.println( DLLDequelJ.removeLast() );
+	
+	System.out.println("\nsize");
+	System.out.println(DLLDequelJ.size());
 
 	System.out.println("\nDequeuing from empty queue should yield error..."); 
-	System.out.println( DLLDequelJ.dequeue() );
-	
-	  
+	System.out.println( DLLDequelJ.removeFirst() );
+	/*v~~~~~~~~~~~~~~MAKE MORE~~~~~~~~~~~~~~v
+	 ^~~~~~~~~~~~~~~~AWESOME~~~~~~~~~~~~~~~^*/
 
     }//end main
-    ^~~~~~~~~~~~~~~~AWESOME~~~~~~~~~~~~~~~^*/
+   
     
 }//end class DLLQueue

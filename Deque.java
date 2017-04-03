@@ -12,6 +12,14 @@ public interface Deque<T>{
     //removes a value from the end of the deque
     public T removeLast ();
 
+    //returns the value of the first node of the deque
+    public T peekFirst();
+
+    //returns the value of the last node of the deque
+    public T peekLast();
+
+    //returns the size of the deque
+    public int size();
 
     /******************Not from API*******************/
     /**inherited from interface java.util.Collection**/
@@ -19,5 +27,5 @@ public interface Deque<T>{
     //checks if the deque is empty
     public boolean isEmpty();
 
-
+    
 }
