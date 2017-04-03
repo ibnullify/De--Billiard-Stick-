@@ -20,7 +20,7 @@
 
 public class DLLQueue<T>// implements Deque<T> 
 {
-    private DLLNode<T> _front, _end;
+    private DLLNode<T> _front, _end; //Constructor(value,previous,next)
 
     // default constructor creates an empty queue
     public DLLQueue()
@@ -28,6 +28,57 @@ public class DLLQueue<T>// implements Deque<T>
 	    _front = _end = null;
 	}
 
+    /*****NEW INTERFACE METHODS*****/
+    public void addFirst (T val) {
+
+	if (isEmpty()) {
+	    _first.setCargo(val);
+	    _last = _first;
+	    return;
+	} else {
+	    _first.setPrev(new DLLNode<T>(val, null, _first));
+	    _first = _first.getPrev();
+	    return;
+	}
+    }
+
+    public void addLast(T val) {
+	if (isEmpty()) {
+	    _last.setCargo(val);
+	    _first = _last;
+	    return;
+	} else {
+	    _last.setNext(new DLLNode<T>(val, _last, null));
+	    _last = _last.getNext();
+	    return;
+	}
+    }
+
+    public T removeFirst() {
+        if (isEmpty()){
+	    //throw exception when someone tries to remove from an empty queue
+	    throw new IndexOutOfBoundsException("There is nothing to remove.");
+	}
+	T rtn = _first.getCargo();
+	_first = _first.getNext();
+	return rtn;
+    }
+    
+    public T removeLast() {
+        if (isEmpty()) {
+	    //throw exception when someone tries to remove from an empty queue
+	    throw new IndexOutOfBoundsException("There is nothing to remove.");
+    }
+	T rtn = _last.getCargo();
+	_last = _last.getPrev();
+	return rtn;
+    }
+
+    
+    /*****NEW INTERFACE METHODS*****/
+    
+
+    /*********PREVIOUS METHODS***********^
     // means of adding a thing to the collection
     public void enqueue( T enQVal ) 
     {
@@ -64,8 +115,11 @@ public class DLLQueue<T>// implements Deque<T>
     {
 	return _front.getValue();
     }//O(1)
+    
+    ^***************PREVIOUS METHODS************/
 
 
+    /***********PREVIOUS METHODS TO BE USED******/
     public boolean isEmpty() 
     {
 	return _front == null; 
@@ -83,6 +137,7 @@ public class DLLQueue<T>// implements Deque<T>
 	}
 	return foo;
     }//O(n)
+    /***********PREVIOUS METHODS TO BE USED******/
 
     /*v~~~~~~~~~~~~~~MAKE MORE~~~~~~~~~~~~~~v
     public static void main( String[] args ) 
