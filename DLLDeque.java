@@ -25,7 +25,7 @@ public class DLLDeque<T> implements Deque<T>
     // default constructor creates an empty queue
     public DLLDeque()
 	{ 
-	    _first = _last = null;
+	    _first = _last = new DLLNode<T>(null,null,null);
 	    _size = 0;
 	}
 
