@@ -30,8 +30,10 @@ public class DLLDeque<T> implements Deque<T>
 	}
 
     /*****NEW INTERFACE METHODS*****/
+    //adds a value to the beginning of the deque
+    //if the deque was previously empty, sets both first and last to this new node
+    //if not then it sets first to the new node
     public void addFirst (T val) {
-
 	if (isEmpty()) {
 	    _first = new DLLNode(val, null, null);
 	    _last = _first;
@@ -45,6 +47,9 @@ public class DLLDeque<T> implements Deque<T>
 	}
     }
 
+    //adds a value to the ending of the deque
+    //if the deque was previously empty, sets both first and last to this new node
+    //if not then it sets last to the new node
     public void addLast(T val) {
 	if (isEmpty()) {
 	    _last = new DLLNode(val, null, null);
@@ -59,6 +64,9 @@ public class DLLDeque<T> implements Deque<T>
 	}
     }
 
+    //removes a value from the beginning of the deque
+    //if the deque is empty, it throws an exception
+    //if not then it sets first to the following node
     public T removeFirst() {
         if (isEmpty()){
 	    //throw exception when someone tries to remove from an empty queue
@@ -70,6 +78,9 @@ public class DLLDeque<T> implements Deque<T>
 	return rtn;
     }
     
+    //removes a value from the ending of the deque
+    //if the deque is empty, it throws an exception
+    //if not then it sets last to the previous node
     public T removeLast() {
         if (isEmpty()) {
 	    //throw exception when someone tries to remove from an empty queue
@@ -81,14 +92,17 @@ public class DLLDeque<T> implements Deque<T>
 	return rtn;
     }
 
+    //returns the first value of the deque
     public T peekFirst() {
 	return _first.getCargo();
     }
 
+    //returns the last value of the deque
     public T peekLast() {
 	return _last.getCargo();
     }
-    
+
+    //returns the size of the deque using a variable that is incremented when necessary throughout the class
     public int size() {
 	return _size;
     }
@@ -139,6 +153,8 @@ public class DLLDeque<T> implements Deque<T>
 
 
     /***********PREVIOUS METHODS TO BE USED******/
+
+    //returns whether or not the size is 0
     public boolean isEmpty() 
     {
 	return _size == 0; 
