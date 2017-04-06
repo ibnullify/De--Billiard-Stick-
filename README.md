@@ -23,3 +23,9 @@
 ## Why a doubly linked node?
 Since the word deque is short for double ended queue, the main point of it is to allow easy adding, removing, and viewing from both the first and last items. Using a doubly linked node allows for no worser case between doing any on these methods on the front or on the back. It turns all the methods into constant runtimes through its system of linkages, and through its usage of previous nodes. This builds off the flaws of both the ArrayList and the LLNode. The ArrayList allows the user to add and remove from the end with ease, but doing so from the front results in a linear runtime. The LLNode allows for easy removal from the front, and easy addition to the back, but makes removing from the back more difficult. The DLLNode allows all of the methods to run with ease.
 TLDR: Constant Runtimes
+
+## Post Critical Feedback Changes  [NEW!!]
+First off thank you to Team Pirates- for giving us a Driver file to use, and for the constructive critiques.
+
+Our main problems were comments that were less than descriptive, and a Deque that would not allow you to peek when empty. We fixed the former of these by adding comments (shocking, I know) and the latter by making a change in our constructor. The mistake we had previously made was we had initially set both the first and last nodes of our DLLNode Deque as null. This posed problems as a null object is not able to perform the methods we had written for a DLLNode. This was fixed by setting both the first and last nodes to new DLLNodes that pointed to null in both directions, and had a cargo value of 0.
+A style problem we had was an inclusion of files in our repo with the tildas (~). This was as a result of a bad .gitignore on our behalf. Luckily for us, a member of Team Pirate fixed this issue on their fork, and we pulled in the solution. 
