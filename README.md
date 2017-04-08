@@ -29,3 +29,7 @@ First off thank you to Team Pirates- for giving us a Driver file to use, and for
 
 Our main problems were comments that were less than descriptive, and a Deque that would not allow you to peek when empty. We fixed the former of these by adding comments (shocking, I know) and the latter by making a change in our constructor. The mistake we had previously made was we had initially set both the first and last nodes of our DLLNode Deque as null. This posed problems as a null object is not able to perform the methods we had written for a DLLNode. This was fixed by setting both the first and last nodes to new DLLNodes that pointed to null in both directions, and had a cargo value of 0.
 A style problem we had was an inclusion of files in our repo with the tildas (~). This was as a result of a bad .gitignore on our behalf. Luckily for us, a member of Team Pirate fixed this issue on their fork, and we pulled in the solution. 
+
+
+### Changes part 2
+No one else has given us a DequeTester as of yet, so there is not much to put here. But you can bet that when we do get a Driver this area will be updated as soon as possible.
