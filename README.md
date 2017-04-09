@@ -31,5 +31,7 @@ Our main problems were comments that were less than descriptive, and a Deque tha
 A style problem we had was an inclusion of files in our repo with the tildas (~). This was as a result of a bad .gitignore on our behalf. Luckily for us, a member of Team Pirate fixed this issue on their fork, and we pulled in the solution. 
 
 
-### Changes part 2
-No one else has given us a DequeTester as of yet, so there is not much to put here. But you can bet that when we do get a Driver this area will be updated as soon as possible.
+### Changes Part 2
+Thank you to Period 4's Team BATwomen for the new Driver.
+
+Although the driver compiled and ran our code smoothly, we noticed an error in the last call to our peekLast() method, where the value returned was of the second to last node. This ended in a lot of confusion, as our peekLast() method was coded correctly, but in fact it was something else that was amiss. Our first guess was it was our toString() method, as we realized that the after removing a value, it still appeared to be printed. Upon inspection of this code, however, we realized the actual problem was our remove methods. We were successully changing the positions of the head and the tail, but we were not changing which nodes they were pointing to. Changing these to null post-removal ended up being the fix we needed.
