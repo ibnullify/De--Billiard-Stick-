@@ -74,6 +74,7 @@ public class DLLDeque<T> implements Deque<T>
 	}
 	T rtn = _first.getCargo();
 	_first = _first.getNext();
+	_first.setPrev(null); 
 	_size--;
 	return rtn;
     }
@@ -88,6 +89,7 @@ public class DLLDeque<T> implements Deque<T>
 	}
 	T rtn = _last.getCargo();
 	_last = _last.getPrev();
+	_last.setNext(null); 
 	_size--;
 	return rtn;
     }
